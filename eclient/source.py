@@ -11,11 +11,9 @@ class Source:
 		pass
 
 import feedparser, pprint, asyncio, aiohttp
-from requests_futures.sessions import FuturesSession
 class FeedSource(Source):
 	@asyncio.coroutine
 	def sync(self, metadata):
-		session = FuturesSession()
 		future_raw_results = yield from aiohttp.request('GET', self.config["uri"])
 
 		chunks = yield from future_raw_results.read()
